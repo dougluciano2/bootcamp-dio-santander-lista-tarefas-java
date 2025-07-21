@@ -2,7 +2,7 @@ package br.com.dougluciano.boadtaskjava.enums;
 
 import lombok.Getter;
 
-@Getter
+
 public enum ApplicationRoutes {
       FORM_LOGIN ("/login"),
       CSS_DIRECTORY ("/css/**"),
@@ -13,8 +13,12 @@ public enum ApplicationRoutes {
 
       private final String path;
 
-      ApplicationRoutes(String message){
-          this.path = message;
+      ApplicationRoutes(String path){
+          this.path = path;
+      }
+
+      public String getPath(){
+          return path;
       }
 
 

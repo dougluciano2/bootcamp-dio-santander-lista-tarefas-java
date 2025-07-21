@@ -5,13 +5,16 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
-@Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 public class User extends AbstractFullEntity{
 
     @NotBlank (message = "not_blank")
