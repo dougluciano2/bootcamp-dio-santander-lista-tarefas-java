@@ -1,15 +1,15 @@
 package br.com.dougluciano.boadtaskjava.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "users")
 public class User extends AbstractFullEntity{
@@ -19,8 +19,11 @@ public class User extends AbstractFullEntity{
     @Column(name = "user_name", nullable = false, unique = true)
     private String username;
 
-    @NotBlank (message = "not_blank")
+    @NotBlank (message = "Password cannot be blank or null")
     @Column(name = "password", nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks;
 
 }
