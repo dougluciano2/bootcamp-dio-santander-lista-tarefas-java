@@ -20,6 +20,7 @@ public class SecurityConfig {
             ApplicationRoutes.CSS_DIRECTORY.getPath(),
             ApplicationRoutes.JAVA_SCRIPT_DIRECTORY.getPath(),
             ApplicationRoutes.ASSETS_DIRECTORY.getPath(),
+            ApplicationRoutes.REGISTER_URL.getPath()
     };
 
     @Bean

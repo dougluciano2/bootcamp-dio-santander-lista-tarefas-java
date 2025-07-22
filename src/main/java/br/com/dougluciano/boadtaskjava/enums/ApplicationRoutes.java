@@ -9,7 +9,9 @@ public enum ApplicationRoutes {
       JAVA_SCRIPT_DIRECTORY ("/js/**"),
       ASSETS_DIRECTORY ("/assets/**"),
       TASKS_URL ("/tasks"),
-      USERS_URL ("/users");
+      USERS_URL ("/users"),
+      NEW_USER("/new"),
+      REGISTER_URL(USERS_URL.getPath() + NEW_USER.getPath());
 
       private final String path;
 
