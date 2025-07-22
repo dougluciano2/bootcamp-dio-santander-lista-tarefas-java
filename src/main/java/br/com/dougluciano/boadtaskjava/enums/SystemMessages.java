@@ -5,7 +5,8 @@ import lombok.Getter;
 
 public enum SystemMessages {
 
-    USER_NOT_FOUND("User not found!");
+    USER_NOT_FOUND("User not found!"),
+    TASK_NOT_FOUND("Task not found!");
 
 
     private String message;

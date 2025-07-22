@@ -17,7 +17,8 @@
                 <h1 class="h3 mb-3 fw-normal">Criar Nova Tarefa</h1>
             </div>
 
-            <form th:action="@{/tasks}" th:object="${task}" method="post">
+            <form th:action="${task.id == null} ? @{/tasks} : @{/tasks/edit/{id}(id=${task.id})}"
+                  th:object="${task}" method="post">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="Título" required>
                     <label for="title">Título</label>

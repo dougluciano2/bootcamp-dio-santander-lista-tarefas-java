@@ -1,8 +1,10 @@
 version: '3.8'
+
 services:
-  mysql-db:
+  # Serviço do Banco de Dados
+  db:
     image: mysql:8.0
-    container_name: bootcamp-mysql
+    container_name: taskboard-db-prod
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: boarddb
@@ -10,3 +12,24 @@ services:
       MYSQL_PASSWORD: Dev@2024@1234
     ports:
       - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  # Serviço da Aplicação Spring Boot
+  app:
+    build: . # Constrói a imagem usando o Dockerfile na pasta atual
+    container_name: taskboard-app-prod
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db # Garante que o banco de dados inicie antes da aplicação
+    environment:
+      # Passa as variáveis de ambiente para a aplicação Spring se conectar ao banco
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/boarddb
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=Dev@2024@1234
+      # Garante que o Flyway rode ao iniciar
+      - SPRING_FLYWAY_ENABLED=true
+
+volumes:
+  mysql-data: {}

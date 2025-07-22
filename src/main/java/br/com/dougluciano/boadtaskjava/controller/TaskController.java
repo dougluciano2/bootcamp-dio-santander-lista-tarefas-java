@@ -11,10 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -65,6 +62,44 @@ public class TaskController {
         var user = userService.findByUsername(username);
 
         service.createTask(task, user);
+
+        return "redirect:/tasks";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditTaskForm(@PathVariable("id")Long id, Model model){
+
+        var task = service.findById(id);
+
+        model.addAttribute("task", task);
+        model.addAttribute("allStatus", TaskStatus.values());
+        model.addAttribute("allPriorities", TaskPriority.values());
+
+        return "task-form";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateTask(
+            @PathVariable("id")Long id, @Valid @ModelAttribute("task") Task task,
+            BindingResult result, Model model
+    ){
+        if(result.hasErrors()){
+            model.addAttribute("allStatus", TaskStatus.values());
+            model.addAttribute("allPriorities", TaskPriority.values());
+            return "task-form";
+        }
+
+        service.updateTask(id, task);
+
+        return "redirect:/tasks";
+
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteTask(@PathVariable("id") Long id, Authentication authentication){
+        var username = authentication.getName();
+
+        service.deleteTask(id, username);
 
         return "redirect:/tasks";
     }
