@@ -10,9 +10,8 @@
           crossorigin="anonymous">
 
     <link rel="stylesheet" th:href="@{/css/style.css}">
-
 </head>
-<body>
+<body class="form-body">
 
 <main class="form-container">
     <div class="card shadow-sm">
@@ -22,9 +21,10 @@
             </div>
 
             <form th:action="@{/users}" th:object="${user}" method="post">
+
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Seu nome" required>
-                    <label for="name">Seu nome</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Seu nome completo" required>
+                    <label for="name">Seu nome completo</label>
                     <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                 </div>
 
@@ -49,6 +49,5 @@
         </div>
     </div>
 </main>
-
 </body>
 </html>
