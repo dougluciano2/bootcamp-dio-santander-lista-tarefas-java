@@ -1,6 +1,7 @@
 package br.com.dougluciano.boadtaskjava.service;
 
 import br.com.dougluciano.boadtaskjava.entities.Task;
+import br.com.dougluciano.boadtaskjava.entities.User;
 import br.com.dougluciano.boadtaskjava.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,10 @@ public class TaskService {
 
     public List<Task> findTaskByUserId(Long userId){
         return repository.findByUserId(userId);
+    }
+
+    public void createTask(Task task, User user){
+        task.setUser(user);
+        repository.save(task);
     }
 }
