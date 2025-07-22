@@ -64,7 +64,6 @@ pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
 buildNumber.properties
-.mvn/
 # Gradle
 .gradle/
 build/
@@ -72,8 +71,6 @@ build/
 
 # Arquivos de lock e cache
 *.lock
-mvnw.cmd
-mvnw
 gradlew
 gradlew.bat
 
