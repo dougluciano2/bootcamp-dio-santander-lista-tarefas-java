@@ -18,7 +18,7 @@ import java.util.List;
 public class User extends AbstractFullEntity{
 
     @NotBlank (message = "not_blank")
-    @Size(min = 1, max = 100, message = "Username must be between {min} and max {max}")
+    @Size(min = 1, max = 100, message = "Name must be between {min} and max {max}")
     @Column(name = "name", nullable = false)
     private String name;
 
